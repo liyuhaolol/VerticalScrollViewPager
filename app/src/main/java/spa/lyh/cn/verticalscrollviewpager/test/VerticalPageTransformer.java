@@ -1,4 +1,4 @@
-package spa.lyh.cn.verticalscrollviewpager;
+package spa.lyh.cn.verticalscrollviewpager.test;
 
 import android.view.View;
 
