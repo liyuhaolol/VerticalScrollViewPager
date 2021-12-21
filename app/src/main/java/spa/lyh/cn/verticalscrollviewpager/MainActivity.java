@@ -3,13 +3,19 @@ package spa.lyh.cn.verticalscrollviewpager;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 
 import java.util.ArrayList;
 
+import cn.lyh.spa.ptr.PtrClassicFrameLayout;
+import cn.lyh.spa.ptr.PtrDefaultHandler;
+import cn.lyh.spa.ptr.PtrFrameLayout;
 import spa.lyh.cn.verticalscrollviewpager.test.VerticalPageTransformer;
 import spa.lyh.cn.verticalscrollviewpager.test.AutoVerticalViewPager;
 
 public class MainActivity extends AppCompatActivity {
+
+    PtrClassicFrameLayout mPtrFrame;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,5 +34,21 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(bannerPagerAdapter);
         viewPager.setCurrentItem(0);
         viewPager.startAutoScroll(4000);
+
+        mPtrFrame = findViewById(R.id.rotate_header_list_view_frame);
+
+        mPtrFrame.setPtrHandler(new PtrDefaultHandler() {
+            @Override
+            public void onRefreshBegin(PtrFrameLayout frame) {
+
+            }
+
+            @Override
+            public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
+                return super.checkCanDoRefresh(frame, content, header);
+                //return false;
+
+            }
+        });
     }
 }

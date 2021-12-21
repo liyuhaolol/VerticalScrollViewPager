@@ -20,6 +20,8 @@ import java.lang.reflect.Field;
 import java.util.LinkedList;
 import java.util.List;
 
+import cn.lyh.spa.ptr.A;
+
 public class AutoVerticalViewPager extends ViewPager {
 
     public interface OnPageClickListener {
@@ -403,7 +405,33 @@ public class AutoVerticalViewPager extends ViewPager {
         }
         requestDisallowInterceptTouchEvent(true);//截断触摸事件
         return super.onTouchEvent(swapTouchEvent(MotionEvent.obtain(ev)));
+        /*onTouchEvent(swapTouchEvent(MotionEvent.obtain(ev)));
+        return true;*/
+
     }
+
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent e) {
+        int action = e.getAction();
+        switch (action) {
+            case MotionEvent.ACTION_DOWN:
+                A.getInstance().a = 1;
+                break;
+            case MotionEvent.ACTION_UP:
+                A.getInstance().a = 0;
+                break;
+        }
+        return super.dispatchTouchEvent(e);
+        //return true;
+    }
+
+/*    @Override
+    public boolean onTouchEvent(MotionEvent ev) {
+        requestDisallowInterceptTouchEvent(true);
+        //return super.onTouchEvent(ev);
+        return true;
+    }*/
 
     private class InnerDataSetObserver extends DataSetObserver {
         @Override
